@@ -26,4 +26,32 @@ object ParameterToolUtils {
     val params = ParamsModel.Params.apply(aws_region, ak, sk, inputStreamName, stream_init_position, streamInitialTimestamp, s3_output_path)
     params
   }
+  def genKafka2S3Params(parameter: ParameterTool): ParamsModel.KafkaS3Params = {
+    val brokerList = parameter.get("broker_list")
+    val sourceTopic = parameter.get("source_topic")
+    val consumerGroup = parameter.get("consumer_group")
+    val kafkaTableName  = parameter.get("kafka_tablename")
+    val s3TableName  = parameter.get("s3_table_name")
+    val s3TablePath  = parameter.get("s3_table_path")
+    val params = ParamsModel.KafkaS3Params.apply(brokerList,sourceTopic,consumerGroup,kafkaTableName,s3TableName,s3TablePath)
+    params
+  }
+
+  def genDataGen2S3Params(parameter: ParameterTool): ParamsModel.DataGenS3Params = {
+
+    val dataGenName  = parameter.get("datagen_table_name")
+    val s3TableName  = parameter.get("s3_table_name")
+    val s3TablePath  = parameter.get("s3_table_path")
+    val params = ParamsModel.DataGenS3Params.apply(dataGenName,s3TableName,s3TablePath)
+    params
+  }
+
+  def genDataGen2HudiParams(parameter: ParameterTool): ParamsModel.DataGenS3Params = {
+
+    val dataGenName  = parameter.get("datagen_table_name")
+    val hudiTableName  = parameter.get("hudi_table_name")
+    val hudiTablePath  = parameter.get("hudi_table_path")
+    val params = ParamsModel.DataGenS3Params.apply(dataGenName,hudiTableName,hudiTablePath)
+    params
+  }
 }

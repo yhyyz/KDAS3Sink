@@ -76,6 +76,7 @@ object Streaming2S3 {
       }
     }).filter(_.name != null)
       .addSink(createSinkFromStaticConfig(params)).setParallelism(1)
+
     log.info("S3 Sink added.")
     env.execute("kinesis analytics from data stream to s3")
   }
